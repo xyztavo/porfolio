@@ -132,7 +132,7 @@ export const siteConfig = {
       contributed: true,
     },
     {
-      title: "ServeCommand Project",
+      title: "ServeCommand",
       description: "Corporate team and task administration platform with slash commands and activity registration flow.",
       tags: ["Drizzle", "PostgreSQL", "NextJs", "Local-First"],
       liveUrl: "https://servecommand.com",
