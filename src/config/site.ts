@@ -200,7 +200,7 @@ export const siteConfig = {
   pages: {
     home: {
       title: "Gustavo Luna",
-      subtitle: "Full Stack Developer crafting modern web experiences",
+      subtitle: "a Full Stack Developer crafting modern web experiences",
       ctaText: "View My Work",
       ctaLink: "/work",
     },
