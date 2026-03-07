@@ -2,6 +2,7 @@
 import Timeline from "../components/Timeline.astro";
 import BottomNav from "../components/BottomNav.astro";
 import Button from "../components/ui/Button.astro";
+import { siteConfig } from "../config/site";
 import "../styles/globals.css"
 ---
 
@@ -20,10 +21,10 @@ import "../styles/globals.css"
         <!-- Header -->
         <div class="text-center mb-16 animate-fade-in">
           <h1 class="text-5xl md:text-7xl font-bold mb-4 glow-text">
-            My Journey
+            {siteConfig.pages.experiences.title}
           </h1>
           <p class="text-xl text-zinc-400">
-            A timeline of my professional experiences and education
+            {siteConfig.pages.experiences.subtitle}
           </p>
         </div>
 
@@ -32,8 +33,8 @@ import "../styles/globals.css"
 
         <!-- CTA Button -->
         <div class="mt-16 text-center animate-fade-in">
-          <Button href="/about">
-            Learn More About Me
+          <Button href={siteConfig.pages.experiences.ctaLink}>
+            {siteConfig.pages.experiences.ctaText}
           </Button>
         </div>
       </div>

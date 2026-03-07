@@ -2,46 +2,8 @@
 import ProjectCard from "../components/ProjectCard.astro";
 import Button from "../components/ui/Button.astro";
 import BottomNav from "../components/BottomNav.astro";
+import { siteConfig } from "../config/site";
 import "../styles/globals.css"
-
-const projects = [
-  {
-    name: "Lunai",
-    description: "An open-source ecosystem with tools to help with your daily life and personal and physical development. Built with Golang, Typescript, and PostgreSQL.",
-    technologies: ["Golang", "TypeScript", "PostgreSQL"],
-    githubUrl: "https://github.com/lunai-monster",
-    liveUrl: "https://www.lunai.monster",
-    featured: true
-  },
-  {
-    name: "Car Ja E-commerce",
-    description: "FullStack e-commerce platform for car parts with microservices payment gateway and RAG integration.",
-    technologies: ["Golang", "NextJs", "Microservices"],
-    featured: true,
-    liveUrl: "https://carja.com.br" 
-    },
-  {
-    name: "Instagram Unfollowers",
-    description: "A browser-based tool to identify users who don't follow you back on Instagram. Features whitelist system, export/import functionality, and customizable timing settings.",
-    technologies: ["TypeScript", "Instagram API", "React"],
-    githubUrl: "https://github.com/davidarroyo1234/InstagramUnfollowers",
-    liveUrl: "https://davidarroyo1234.github.io/InstagramUnfollowers/",
-    contributed: true
-  },
-  {
-    name: "ServeCommand Project",
-    description: "Corporate team and task administration platform with slash commands and activity registration flow.",
-    technologies: ["Drizzle", "PostgreSQL", "NextJs", "Local-First"],
-    liveUrl: "https://www.servecommand.com/",
-    contributed: true
-  },
-  {
-    name: "Direção Positiva",
-    description: "Full-Stack application for driving instructors and students with Google Maps API integration.",
-    technologies: ["React", "Golang", "Google Maps API"],
-    liveUrl: "https://direcaopositiva.com",
-  }
-];
 ---
 
 <html lang="en" transition:animate="fade">
@@ -60,13 +22,13 @@ const projects = [
         <!-- Header -->
         <div class="text-center mb-16 animate-fade-in">
           <h1 class="text-5xl md:text-7xl font-bold mb-4 glow-text">
-            My Work
+            {siteConfig.pages.work.title}
           </h1>
           <p class="text-xl text-zinc-400 mb-8">
-            Some projects I've built and contributed to
+            {siteConfig.pages.work.subtitle}
           </p>
           <a 
-            href="https://github.com/xyztavo" 
+            href={siteConfig.contact.github}
             target="_blank" 
             class="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
           >
@@ -76,12 +38,20 @@ const projects = [
 
         <!-- Projects Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-          {projects.map((project, index) => (
+          {siteConfig.projects.map((project, index) => (
             <div 
               class="animate-project-card"
               style={`animation-delay: ${index * 0.1}s`}
             >
-              <ProjectCard {...project} />
+              <ProjectCard 
+                name={project.title}
+                description={project.description}
+                technologies={project.tags}
+                githubUrl={project.github}
+                liveUrl={project.liveUrl}
+                featured={project.featured}
+                contributed={project.contributed}
+              />
             </div>
           ))}
         </div>
@@ -91,8 +61,8 @@ const projects = [
           <p class="text-zinc-400 mb-6 text-lg">
             Want to know more about my journey?
           </p>
-          <Button href="/experiences">
-            View My Experience Timeline
+          <Button href={siteConfig.pages.work.ctaLink}>
+            {siteConfig.pages.work.ctaText}
           </Button>
         </div>
       </div>

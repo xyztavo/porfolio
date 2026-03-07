@@ -1,53 +1,6 @@
 ---
 import { Briefcase, GraduationCap, MapPin } from '@lucide/astro';
-
-const experiences = [
-  {
-    type: "work",
-    company: "ServeCommand",
-    location: "NY, Remote",
-    role: "Dev Fullstack Freelance",
-    period: "August 2025 - November 2025",
-    description: "Collaborated in development as a remote freelance role on the project, developed features like slash commands and a new activity registration flow. The project is focused on corporate team and task administration.",
-    technologies: ["Drizzle", "PostgreSQL", "NextJs", "Local-First", "Proprietary Sync Engine"]
-  },
-  {
-    type: "work",
-    company: "Car Ja",
-    location: "São Paulo",
-    role: "Dev Fullstack Freelance",
-    period: "Since November 2025",
-    description: "Developed a FullStack e-commerce platform focused on point-of-sale for car parts, with microservices payment gateway integration and RAG.",
-    technologies: ["Golang", "NextJs"]
-  },
-  {
-    type: "work",
-    company: "Direção Positiva",
-    location: "São Paulo",
-    role: "Dev Fullstack Freelance",
-    period: "Since November 2025",
-    description: "Developed a Full-Stack application for driving instructors and students, with Google Maps API integration.",
-    technologies: ["React", "Golang"]
-  },
-  {
-    type: "education",
-    company: "Etec Irmã Agostina",
-    location: "Autódromo Interlagos, SP",
-    role: "Systems Development",
-    period: "June 2023 - December 2025",
-    description: "Studied systems analysis and development, developed full stack projects like the final graduation project (TCC) using knowledge of CI/CD, Hosting, SEO, and Web Development.",
-    technologies: ["Typescript", "NestJs", "NextJs"]
-  },
-  {
-    type: "education",
-    company: "Fatec Zona Sul",
-    location: "São Paulo, SP",
-    role: "Systems Development",
-    period: "Since February 2026",
-    description: "Started the systems analysis and development course at Fatec Zona Sul.",
-    technologies: []
-  }
-];
+import { siteConfig } from "../config/site";
 ---
 
 <div class="relative">
@@ -55,7 +8,7 @@ const experiences = [
   <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-zinc-800 via-zinc-700 to-zinc-800 timeline-line"></div>
 
   <!-- Timeline Items -->
-  {experiences.map((exp, index) => (
+  {siteConfig.experiences.map((exp, index) => (
     <div 
       class={`relative mb-16 timeline-item animate-timeline`}
       style={`animation-delay: ${index * 0.2}s`}
@@ -77,10 +30,10 @@ const experiences = [
             
             <!-- Company & Role -->
             <h3 class="text-2xl font-bold text-white mb-2">
-              {exp.company}
+              {exp.organization}
             </h3>
             <p class="text-lg text-zinc-300 mb-2">
-              {exp.role}
+              {exp.title}
             </p>
             <p class="inline-flex items-center gap-1.5 text-sm text-zinc-500 mb-4">
               <MapPin size={14} />
@@ -93,9 +46,9 @@ const experiences = [
             </p>
 
             <!-- Technologies -->
-            {exp.technologies.length > 0 && (
+            {(exp as any).tags && Array.isArray((exp as any).tags) && (exp as any).tags.length > 0 && (
               <div class="flex flex-wrap gap-2 justify-start">
-                {exp.technologies.map((tech) => (
+                {(exp as any).tags.map((tech: string) => (
                   <span class="text-xs px-2 py-1 bg-zinc-800 text-zinc-300 rounded">
                     {tech}
                   </span>

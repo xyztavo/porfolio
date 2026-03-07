@@ -2,6 +2,7 @@
 import BottomNav from "../components/BottomNav.astro";
 import Button from "../components/ui/Button.astro";
 import { MapPin, Mail, Phone, Linkedin } from '@lucide/astro';
+import { siteConfig } from "../config/site";
 import "../styles/globals.css"
 ---
 
@@ -20,10 +21,10 @@ import "../styles/globals.css"
         <!-- Header -->
         <div class="text-center mb-16 animate-fade-in">
           <h1 class="text-5xl md:text-7xl font-bold mb-4 glow-text">
-            About Me
+            {siteConfig.pages.about.title}
           </h1>
           <p class="text-xl text-zinc-400">
-            Get to know me better
+            {siteConfig.pages.about.subtitle}
           </p>
         </div>
 
@@ -33,8 +34,8 @@ import "../styles/globals.css"
           <div class="md:col-span-1 animate-fade-in">
             <div class="aspect-square bg-zinc-900/50 border border-zinc-800 rounded-lg overflow-hidden hover:border-zinc-600 transition-all">
               <img 
-                src="/profile.png" 
-                alt="Gustavo Luna Profile" 
+                src={siteConfig.personal.profileImage}
+                alt={`${siteConfig.personal.name} Profile`}
                 class="w-full h-full object-cover"
               />
             </div>
@@ -46,18 +47,9 @@ import "../styles/globals.css"
             <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-zinc-600 transition-all animate-fade-in">
               <h2 class="text-2xl font-bold text-white mb-4">Hello!</h2>
               <div class="text-zinc-400 space-y-3 leading-relaxed">
-                <p>
-                  I'm Gustavo Luna, a Full Stack Developer passionate about building innovative solutions 
-                  and contributing to meaningful projects. Currently based in São Paulo, Brazil.
-                </p>
-                <p>
-                  I specialize in full-stack development with a focus on modern web technologies, 
-                  creating scalable applications, and implementing efficient database solutions.
-                </p>
-                <p>
-                  When I'm not coding, I'm exploring new technologies, contributing to open-source projects, 
-                  and continuously learning to improve my craft.
-                </p>
+                {siteConfig.personal.bio.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
               </div>
             </div>
 
@@ -65,24 +57,11 @@ import "../styles/globals.css"
             <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-zinc-600 transition-all animate-fade-in">
               <h3 class="text-xl font-bold text-white mb-4">Areas of Interest</h3>
               <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1.5 bg-zinc-800 text-zinc-300 rounded-full text-sm border border-zinc-700">
-                  Full Stack Development
-                </span>
-                <span class="px-3 py-1.5 bg-zinc-800 text-zinc-300 rounded-full text-sm border border-zinc-700">
-                  Frontend Development (Web)
-                </span>
-                <span class="px-3 py-1.5 bg-zinc-800 text-zinc-300 rounded-full text-sm border border-zinc-700">
-                  Backend Development (RESTFUL Api's)
-                </span>
-                <span class="px-3 py-1.5 bg-zinc-800 text-zinc-300 rounded-full text-sm border border-zinc-700">
-                  Database Design (PL-SQL)
-                </span>
- <span class="px-3 py-1.5 bg-zinc-800 text-zinc-300 rounded-full text-sm border border-zinc-700">
-   CI/CD (Github Actions) 
- </span>
- <span class="px-3 py-1.5 bg-zinc-800 text-zinc-300 rounded-full text-sm border border-zinc-700">
-   Infra (VPS Hosting, Docker, Kubernetes)
- </span>
+                {siteConfig.personal.areasOfInterest.map((area) => (
+                  <span class="px-3 py-1.5 bg-zinc-800 text-zinc-300 rounded-full text-sm border border-zinc-700">
+                    {area}
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -92,29 +71,29 @@ import "../styles/globals.css"
               <div class="space-y-3">
                 <div class="flex items-center gap-3 text-zinc-400">
                   <MapPin size={18} class="text-zinc-500" />
-                  <span>São Paulo, SP</span>
+                  <span>{siteConfig.contact.location}</span>
                 </div>
                 <div class="flex items-center gap-3 text-zinc-400">
                   <Phone size={18} class="text-zinc-500" />
-                  <a href="tel:+5511993318133" class="hover:text-white transition-colors">
-                    +55 11 99331-8133
+                  <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, '')}`} class="hover:text-white transition-colors">
+                    {siteConfig.contact.phone}
                   </a>
                 </div>
                 <div class="flex items-center gap-3 text-zinc-400">
                   <Mail size={18} class="text-zinc-500" />
-                  <a href="mailto:gustavocluna81@gmail.com" class="hover:text-white transition-colors">
-                    gustavocluna81@gmail.com
+                  <a href={`mailto:${siteConfig.contact.email}`} class="hover:text-white transition-colors">
+                    {siteConfig.contact.email}
                   </a>
                 </div>
                 <div class="flex items-center gap-3 text-zinc-400">
                   <Linkedin size={18} class="text-zinc-500" />
                   <a 
-                    href="https://linkedin.com/in/gustavocluna" 
+                    href={siteConfig.contact.linkedin}
                     target="_blank" 
                     rel="noopener noreferrer"
                     class="hover:text-white transition-colors"
                   >
-                    linkedin.com/in/gustavocluna
+                    {siteConfig.contact.linkedin.replace('https://', '')}
                   </a>
                 </div>
               </div>
@@ -124,14 +103,12 @@ import "../styles/globals.css"
             <div class="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-zinc-600 transition-all animate-fade-in">
               <h3 class="text-xl font-bold text-white mb-4">Languages</h3>
               <div class="space-y-2">
-                <div class="flex justify-between items-center">
-                  <span class="text-zinc-300">Portuguese</span>
-                  <span class="text-zinc-500 text-sm">Native</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-zinc-300">English</span>
-                  <span class="text-zinc-500 text-sm">C2 Speaking, C1 Writing</span>
-                </div>
+                {siteConfig.languages.map((lang) => (
+                  <div class="flex justify-between items-center">
+                    <span class="text-zinc-300">{lang.name}</span>
+                    <span class="text-zinc-500 text-sm">{lang.level}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -139,8 +116,8 @@ import "../styles/globals.css"
 
         <!-- CTA Button -->
         <div class="mt-16 text-center animate-fade-in">
-          <Button href="/skills">
-            Check Out My Skills
+          <Button href={siteConfig.pages.about.ctaLink}>
+            {siteConfig.pages.about.ctaText}
           </Button>
         </div>
       </div>
